@@ -4,24 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdoraGigs | High-Value Gigs, Simplified</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --navy: #0a192f;
+            --navy: #030a16;
+            --navy-light: #0a192f;
             --teal: #64ffda;
             --white: #e6f1ff;
             --slate: #8892b0;
             --gold: #ffc107;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--navy);
             color: var(--white);
             line-height: 1.6;
+            overflow-x: hidden;
         }
+
+        /* Animated Background Glows */
+        .glow {
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { top: -10%; left: -10%; }
+            to { top: 60%; left: 70%; }
+        }
+
+        /* Navigation */
+        nav {
+            padding: 30px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .nav-logo { font-weight: 800; font-size: 1.5rem; color: var(--white); text-decoration: none; }
+        .nav-logo span { color: var(--teal); }
 
         /* Hero Section */
         .hero {
@@ -31,151 +67,167 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
-            background: radial-gradient(circle at center, rgba(100, 255, 218, 0.05) 0%, transparent 70%);
+            padding: 0 20px;
         }
 
-        .logo-area { margin-bottom: 20px; }
-        .star { color: var(--gold); font-size: 2.5rem; }
-
-        h1 { font-size: 4rem; font-weight: 700; margin-bottom: 10px; }
-        h1 span { color: var(--teal); font-weight: 300; }
-
-        .tagline {
+        .badge {
+            background: rgba(100, 255, 218, 0.1);
             color: var(--teal);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 1rem;
-            margin-bottom: 30px;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
         }
 
-        .hero p { max-width: 600px; color: var(--slate); font-size: 1.1rem; margin-bottom: 40px; }
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        h1 span { 
+            background: linear-gradient(90deg, var(--white), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        /* Waitlist Form */
-        .waitlist-form {
+        .hero p { max-width: 650px; color: var(--slate); font-size: 1.2rem; margin-bottom: 40px; }
+
+        /* Modern Waitlist Form */
+        .form-container {
+            background: var(--glass);
+            padding: 8px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
-            gap: 10px;
             width: 100%;
             max-width: 500px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         input {
             flex: 1;
+            background: transparent;
+            border: none;
             padding: 15px 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            background: rgba(255, 255, 255, 0.05);
             color: white;
+            font-size: 1rem;
             outline: none;
         }
 
         button {
-            padding: 15px 30px;
-            border-radius: 8px;
-            border: none;
-            background-color: var(--teal);
+            background: var(--teal);
             color: var(--navy);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.4s;
         }
 
-        button:hover { background: #52d1b2; transform: translateY(-2px); }
+        button:hover { background: #fff; transform: scale(1.02); }
 
-        /* Services Section */
-        .services { padding: 100px 20px; background: rgba(255, 255, 255, 0.02); }
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 2.5rem; color: var(--white); }
-        .section-title div { width: 50px; height: 3px; background: var(--teal); margin: 10px auto; }
-
+        /* Services Grid */
+        .services { padding: 150px 10%; }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .card {
-            padding: 40px;
-            background: rgba(17, 34, 64, 0.8);
-            border-radius: 12px;
-            border-bottom: 3px solid transparent;
-            transition: 0.3s;
+            background: linear-gradient(145deg, rgba(17, 34, 64, 0.4), rgba(17, 34, 64, 0.2));
+            padding: 50px 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.5s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover { border-bottom: 3px solid var(--teal); transform: translateY(-10px); }
-        .card h3 { color: var(--teal); margin-bottom: 15px; }
-        .card p { color: var(--slate); font-size: 0.95rem; }
+        .card:hover {
+            border-color: var(--teal);
+            transform: translateY(-10px);
+            background: rgba(17, 34, 64, 0.6);
+        }
 
-        /* Footer / Contact */
+        .card-icon { color: var(--teal); font-size: 2rem; margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .card p { color: var(--slate); }
+
+        /* Footer */
         footer {
-            padding: 60px 20px;
+            padding: 80px 10%;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(2, 6, 12, 0.8);
         }
 
-        .contact-links { margin: 20px 0; }
-        .contact-links a { color: var(--teal); text-decoration: none; margin: 0 15px; font-size: 0.9rem; }
-        .contact-links a:hover { text-decoration: underline; }
+        .social-links { margin: 30px 0; }
+        .social-links a { color: var(--white); text-decoration: none; margin: 0 20px; transition: 0.3s; opacity: 0.6; }
+        .social-links a:hover { color: var(--teal); opacity: 1; }
 
-        .copyright { font-size: 0.8rem; color: var(--slate); margin-top: 20px; }
+        .founder-credit { margin-top: 40px; font-size: 0.9rem; color: var(--slate); }
+        .founder-credit b { color: var(--white); }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .waitlist-form { flex-direction: column; }
-            input { width: 100%; }
+            .form-container { flex-direction: column; background: transparent; border: none; padding: 0; }
+            input { background: var(--glass); border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1); }
+            button { width: 100%; }
         }
     </style>
 </head>
 <body>
 
+    <div class="glow"></div>
+    
+    <nav>
+        <a href="#" class="nav-logo">Adora<span>Gigs</span></a>
+        <div style="color: var(--gold); font-size: 1.2rem;">★</div>
+    </nav>
+
     <section class="hero">
-        <div class="logo-area">
-            <div class="star">★</div>
-            <h1>Adora<span>Gigs</span></h1>
-            <div class="tagline">High-Value Gigs, Simplified</div>
-        </div>
-        <p>A premium marketplace connecting next-gen talent with world-class opportunities. Build your future with trust and quality.</p>
+        <div class="badge">COMING SOON • MARCH 2026</div>
+        <h1>Elevate Your <span>Hustle</span></h1>
+        <p>A premium ecosystem where top-tier talent meets high-value opportunities. We’re simplifying the future of work, one gig at a time.</p>
         
-        <form class="waitlist-form">
-            <input type="email" placeholder="Your best email address" required>
-            <button type="submit">Join Waitlist</button>
-        </form>
+        <div class="form-container">
+            <input type="email" placeholder="Enter your email for early access" required>
+            <button>Join Waitlist</button>
+        </div>
     </section>
 
     <section class="services">
-        <div class="section-title">
-            <h2>What We Do</h2>
-            <div></div>
-        </div>
         <div class="grid">
             <div class="card">
-                <h3>Vetted Talent</h3>
-                <p>We handpick the best student creators, developers, and designers to ensure premium results for every gig.</p>
+                <div class="card-icon">⚡</div>
+                <h3>Vetted Excellence</h3>
+                <p>Only the top 5% of student talent. We ensure quality so you don't have to worry about the results.</p>
             </div>
             <div class="card">
-                <h3>Seamless Workflow</h3>
-                <p>From project brief to final payment, our platform simplifies the process so you can focus on building.</p>
+                <div class="card-icon">💎</div>
+                <h3>Premium Gigs</h3>
+                <p>Focus on projects that actually matter. We bring high-value opportunities to your dashboard.</p>
             </div>
             <div class="card">
-                <h3>Growth Driven</h3>
-                <p>We help freelancers build long-term professional careers while helping businesses scale with top-tier talent.</p>
+                <div class="card-icon">🚀</div>
+                <h3>Growth First</h3>
+                <p>Scaling your career or your business? AdoraGigs is designed to be your long-term growth partner.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="logo-area">
-            <h3 style="color: var(--white); letter-spacing: 2px;">AdoraGigs</h3>
-        </div>
-        <div class="contact-links">
-            <a href="mailto:contact@adoragigs.com">Email Us</a>
-            <a href="https://instagram.com/adoragigs" target="_blank">Instagram</a>
+        <div class="nav-logo">Adora<span>Gigs</span></div>
+        <p style="color: var(--slate); margin-top: 10px;">High-Value Gigs, Simplified.</p>
+        
+        <div class="social-links">
+            <a href="#">Instagram</a>
             <a href="#">LinkedIn</a>
+            <a href="#">Twitter</a>
         </div>
-        <div class="copyright">
-            &copy; 2026 AdoraGigs. Crafted with passion by Adarsh & Co-founder.
+
+        <div class="founder-credit">
+            Crafted with passion by <b>Adarsh</b> & <b>Co-founder</b>
         </div>
     </footer>
 
